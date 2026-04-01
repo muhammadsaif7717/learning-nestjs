@@ -8,9 +8,10 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({isGlobal:true}),
     AuthModule, 
     UserModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/nest-yoyo'),
+    MongooseModule.forRoot(process.env.MONGODB_URI as string),
     ConfigModule.forRoot()
   ],
   controllers: [AppController],

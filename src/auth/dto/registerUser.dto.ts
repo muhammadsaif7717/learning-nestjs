@@ -1,7 +1,23 @@
+import { IsEmail, IsNotEmpty, IsString, IsEnum } from "class-validator";
+import { Role } from "src/user/user.types";
+
 export class RegisterDto {
-    fname: string;
-    lname: string;
-    email: string;
-    password: string;
-    role: string
+  @IsString()
+  @IsNotEmpty()
+  fname: string;
+
+  @IsString()
+  @IsNotEmpty()
+  lname: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsEnum(Role)
+  role: Role;
 }
