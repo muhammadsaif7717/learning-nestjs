@@ -45,4 +45,8 @@ export class UserService {
 
   return user;
 }
+
+async getUserById (id:string){
+    return await this.userModel.findOne({_id:id})
+}
 }
