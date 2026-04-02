@@ -20,7 +20,7 @@ export class AuthService {
 
         const user = await this.userService.createUser({ ...registerUserDto, password: hashedPass })
 
-        const payload={ sub: user._id};
+        const payload={ sub: user._id, role:user.role};
         const token = await this.jwtService.signAsync(payload)
         return {access_token:token, user};
 
@@ -29,8 +29,7 @@ export class AuthService {
     //login function
     async loginUser(loginUserDto:LoginDto){
           const user = await this.userService.findUser(loginUserDto)
-        
-          const payload={sub: user?._id}
+          const payload={sub: user?._id, role:user.role}
           const token = await this.jwtService.signAsync(payload)
           return {access_token: token, user}
     }

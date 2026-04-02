@@ -31,7 +31,20 @@ export class AuthGuard implements CanActivate {
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+  let authHeader = request.headers['authorization'];
+
+  // If header is an array, take the first element
+  if (Array.isArray(authHeader)) {
+    authHeader = authHeader[0];
   }
+
+  if (!authHeader) return undefined;
+
+  // Now TypeScript knows authHeader is a string
+  if (authHeader.startsWith('Bearer ')) {
+    return authHeader.slice(7).trim(); // remove 'Bearer ' prefix
+  }
+
+  return undefined;
+}
 }

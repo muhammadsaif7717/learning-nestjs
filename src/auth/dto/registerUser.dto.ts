@@ -4,20 +4,20 @@ import { Role } from "src/user/user.types";
 export class RegisterDto {
   @IsString()
   @IsNotEmpty()
-  fname: string;
+  fname!: string;
 
   @IsString()
   @IsNotEmpty()
-  lname: string;
+  lname!: string;
 
   @IsEmail()
   @IsNotEmpty()
-  email: string;
+  email!: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
+  password!: string;
 
   @IsEnum(Role)
-  role: Role;
+  role!: Role;
 }
